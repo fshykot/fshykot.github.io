@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fahad Hossain</title>
+</head>
+<body>
+	
 
+	<table>
+		<tr>
+			<td>Trip Distance</td>
+			
+			<td><input type="number" id="totalkilo"></td>
+		</tr>
+		<tr>
+			<td>City Aprox</td>
+			<td><input type="number" id="citykilo"></td>
+		</tr>
+		<tr>
+			<td>Toll / Parking</td>
+			<td><input type="number" id="tolls"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="button" value="Calculate" onclick="calculation()"></td>
+			
+		</tr>
+	</table>
+
+	<div id="demo"></div>
+		<a href="https://forms.gle/dgMxMdBJAaHsTpkHA">Fielder Works</a> 
+		<br>
+
+		<a href="https://forms.gle/BHt4wiaQrjSxfpEG9">Fielder km</a>
+		<br>
+			<a href="https://docs.google.com/spreadsheets/d/1FXn0uLs1QaHmVoIECnKd_-9Aq5TghWHeYCv1-83iW8k/edit?usp=sharing">Fielder reports</a>
+			<br>
+
+</body>
+<script>
+	function calculation(){
+		x = parseInt(document.getElementById('totalkilo').value);
+		y = parseInt(document.getElementById('citykilo').value);
+		z = parseInt(document.getElementById('tolls').value);
+		if (isNaN(x)) x = 0;
+		if (isNaN(y)) y = 0;
+		if (isNaN(z)) z = 0;
+
+		highway = x - y;
+		highwaygas = parseInt(highway * 3.5);
+		citygas = parseInt(y * 6);
+		gascost = citygas +  highwaygas;
+		duration = ((highway/55) + (y/30)) + 1.5 ;
+		mobil = x * .5;
+		filter = x * 2/3;
+		others = x * .5;
+		driver = duration * 100;
+		overall_cost = highwaygas + citygas + z + driver + mobil + filter + others;
+		gasntoll = gascost + z;
+
+		document.getElementById('demo').innerHTML = "<table><tr><td>Highway</td><td>" + highway + "</td></tr><tr><td>City</td><td>" + y + "</td></tr><tr><td>Total Kilo</td><td>" + x + "</td></tr><tr><td>Duration</td><td>" + Math.round(duration) +" Hours (Approximately) </td></tr><tr><td>Gas in City</td><td>" + citygas + "</td></tr><tr><td>Gas in Highway</td><td>" + highwaygas + "</td></tr><tr><td><b>Gas Cost</td><td>"+ gascost + "</b></td></tr><tr><td>Toll/Parking</td><td>" + z + "</td></tr><tr><td><b>Main Cost</td><td>" + gasntoll 	+ "</b></td></tr><tr><td>Driver Cost</td><td> " + Math.round(driver) +"</td></tr><tr><td>Mobil</td><td>" + mobil +"</td></tr><tr><td>Filter</td><td>" + filter+ " </td></tr><tr><td>Other Cost</td><td>" + Math.round( others) + "</td></tr><tr><td>Overall Cost</td><td>"+ Math.round(overall_cost) +"</td></tr></table>";
+		
+
+	}
+</script>
+</html>
